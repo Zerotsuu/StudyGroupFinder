@@ -5,7 +5,6 @@ import com.studygroupfinder.finals.exception.ResourceNotFoundException;
 import com.studygroupfinder.finals.model.StudyGroup;
 import com.studygroupfinder.finals.repository.StudySessionRepository;
 import com.studygroupfinder.finals.repository.UserRepository;
-import com.studygroupfinder.finals.service.UserService;
 import com.studygroupfinder.finals.model.User;
 import com.studygroupfinder.finals.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class StudyGroupService {
 
     @Autowired
     private StudySessionRepository studySessionRepository;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -84,6 +80,8 @@ public class StudyGroupService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
+        group.getMembers().add(user);
+        studyGroupRepository.save(group);
         user.getJoinedGroups().add(group);
         userRepository.save(user);
     }
@@ -95,6 +93,8 @@ public class StudyGroupService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
+        group.getMembers().remove(user);
+        studyGroupRepository.save(group);
         user.getJoinedGroups().remove(group);
         userRepository.save(user);
     }

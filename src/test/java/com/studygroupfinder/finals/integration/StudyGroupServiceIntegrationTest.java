@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import jakarta.persistence.EntityManager;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,9 +31,6 @@ public class StudyGroupServiceIntegrationTest {
 
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private EntityManager entityManager;
 
     private User testUser;
     private Course testCourse;
@@ -103,7 +99,7 @@ public class StudyGroupServiceIntegrationTest {
         userRepository.save(joiningUser);
 
         studyGroupService.joinStudyGroup(createdGroup.getId(), joiningUser.getId());
-        entityManager.clear();
+
         StudyGroup updatedGroup = studyGroupRepository.findById(createdGroup.getId()).orElseThrow();
         assertTrue(updatedGroup.getMembers().contains(joiningUser));
     }
@@ -123,7 +119,6 @@ public class StudyGroupServiceIntegrationTest {
         // Leave the group
         studyGroupService.leaveStudyGroup(createdGroup.getId(), testUser.getId());
 
-        studyGroupRepository.flush();
         StudyGroup updatedGroup = studyGroupRepository.findById(createdGroup.getId()).orElseThrow();
         assertFalse(updatedGroup.getMembers().contains(testUser));
     }
