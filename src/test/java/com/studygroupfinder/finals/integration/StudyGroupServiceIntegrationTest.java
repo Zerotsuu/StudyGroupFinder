@@ -6,6 +6,7 @@ import com.studygroupfinder.finals.model.User;
 import com.studygroupfinder.finals.repository.CourseRepository;
 import com.studygroupfinder.finals.repository.StudyGroupRepository;
 import com.studygroupfinder.finals.repository.UserRepository;
+import com.studygroupfinder.finals.service.StudyGroupService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
