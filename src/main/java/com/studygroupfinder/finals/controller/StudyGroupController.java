@@ -43,9 +43,10 @@ public class StudyGroupController {
         return "layout";
     }
 //Display Modal
-    @GetMapping("/create")
+    @GetMapping("/create-modal")
     public String showCreateForm(Model model) {
         model.addAttribute("studyGroup", new StudyGroup());
+        model.addAttribute("courses", courseService.getAllCourses());
         return "create-study-group-modal";
     }
 //Push studygroup data into jpa/sql

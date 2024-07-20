@@ -9,7 +9,7 @@ function createStudyGroup() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = '/study-groups/' + data.groupId;
+                window.location.href = (contextPath + '/study-groups/' + data.groupId);
             } else {
                 alert('Error creating study group: ' + data.message);
             }
@@ -21,7 +21,7 @@ function createStudyGroup() {
 }
 
 function openCreateStudyGroupModal() {
-    fetch(contextPath + `/study-groups/create-modal`)
+    fetch(contextPath + `/study-groups/create-modal`, {method:'get'})
         .then(response => response.text())
         .then(html => {
             window.dispatchEvent(new CustomEvent('open-modal', { detail: html }));

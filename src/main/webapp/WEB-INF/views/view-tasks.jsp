@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script src="${pageContext.request.contextPath}/js/taskList.js"></script>
 <body class="bg-gray-100">
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-6">Tasks for ${studyGroup.name}</h1>
@@ -136,5 +137,6 @@
             document.getElementById('editTaskForm').style.display = 'none';
         }
     </script>
+
 </div>
 </body>
